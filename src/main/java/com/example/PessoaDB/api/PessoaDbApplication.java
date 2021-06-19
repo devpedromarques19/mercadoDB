@@ -10,4 +10,5 @@ public class PessoaDbApplication {
 		SpringApplication.run(PessoaDbApplication.class, args);
 	}
 
+
 }
