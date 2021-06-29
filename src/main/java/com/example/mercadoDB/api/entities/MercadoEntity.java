@@ -1,5 +1,6 @@
-package com.example.PessoaDB.api.entities;
+package com.example.mercadoDB.api.entities;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class MercadoEntity {
     }
 
     @NotEmpty
+    @Length (min = 3, max = 255, message = "O nome da empresa deve conter entre 3 a 255 caracteres")
     public String getNome() {
         return nome;
     }
@@ -38,7 +40,8 @@ public class MercadoEntity {
         this.nome = nome;
     }
 
-    @CNPJ
+    @NotEmpty
+    @CNPJ (message = "CNPJ invalido")
     public String getCnpj() {
         return cnpj;
     }

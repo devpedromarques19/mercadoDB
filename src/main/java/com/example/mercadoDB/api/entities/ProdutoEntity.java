@@ -1,10 +1,9 @@
-package com.example.PessoaDB.api.entities;
+package com.example.mercadoDB.api.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.Optional;
 
 @Entity
 @Table(name = "produto")

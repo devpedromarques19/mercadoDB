@@ -1,6 +1,6 @@
-package com.example.PessoaDB.api.repositories;
+package com.example.mercadoDB.api.repositories;
 
-import com.example.PessoaDB.api.entities.MercadoEntity;
+import com.example.mercadoDB.api.entities.MercadoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MercadoRepository extends JpaRepository <MercadoEntity, Integer> {

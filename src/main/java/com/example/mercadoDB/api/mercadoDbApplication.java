@@ -1,13 +1,13 @@
-package com.example.PessoaDB.api;
+package com.example.mercadoDB.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PessoaDbApplication {
+public class mercadoDbApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PessoaDbApplication.class, args);
+		SpringApplication.run(mercadoDbApplication.class, args);
 	}
 
 

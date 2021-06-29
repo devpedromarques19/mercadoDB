@@ -1,13 +1,22 @@
-package com.example.PessoaDB.api.dto;
+package com.example.mercadoDB.api.dto;
 
 public class ProdutoDto {
 
+    int id;
     String nome;
     double preco;
     int quantidade;
     int mercado_id;
 
     public ProdutoDto() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
