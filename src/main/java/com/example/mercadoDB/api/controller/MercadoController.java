@@ -20,9 +20,6 @@ import java.util.List;
 public class MercadoController {
 
     @Autowired
-    MercadoRepository mercadoRepository;
-
-    @Autowired
     public MercadoService mercadoService;
 
     @CrossOrigin
@@ -37,10 +34,8 @@ public class MercadoController {
             @Valid @RequestBody MercadoEntity mercadoEntity, BindingResult result){
 
         Response<MercadoEntity> response = new Response<MercadoEntity>();
-
-
-        if (result.hasErrors()||mercadoRepository.findByCnpj(mercadoEntity.getCnpj()) != null){
-            if (mercadoRepository.findByCnpj(mercadoEntity.getCnpj()) != null) {
+        if (result.hasErrors()||mercadoService.buscarPorCnpj(mercadoEntity.getCnpj()) != null){
+            if (mercadoService.buscarPorCnpj(mercadoEntity.getCnpj()) != null) {
                 response.getErrors().add("CNPJ já existente no banco, digite outro");
             }
             if (result.hasErrors()) {
@@ -62,8 +57,8 @@ public class MercadoController {
 
         Response<MercadoEntity> response = new Response<MercadoEntity>();
 
-        if (result.hasErrors()||mercadoRepository.findById(mercadoEntity.getId())==null) {
-            if (mercadoRepository.findById(mercadoEntity.getId())==null){
+        if (result.hasErrors()||mercadoService.buscarPorId(mercadoEntity.getId())==null) {
+            if (mercadoService.buscarPorId(mercadoEntity.getId())==null){
                 response.getErrors().add("O mercado com o id "+mercadoEntity.getId()+" não existe, digite outro");
             }
             if (result.hasErrors()) {
@@ -83,7 +78,7 @@ public class MercadoController {
 
         Response<String> response = new Response<String>();
 
-        if (mercadoRepository.findById(mercadoEntity.getId()) == null) {
+        if (mercadoService.buscarPorId(mercadoEntity.getId()) == null) {
             response.getErrors().add("O mercado com o id " + mercadoEntity.getId() + " não existe, digite outro");
             return ResponseEntity.badRequest().body(response);
         } else {

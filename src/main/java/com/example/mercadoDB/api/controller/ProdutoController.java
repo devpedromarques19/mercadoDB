@@ -6,6 +6,7 @@ import com.example.mercadoDB.api.entities.ProdutoEntity;
 import com.example.mercadoDB.api.repositories.MercadoRepository;
 import com.example.mercadoDB.api.repositories.ProdutoRepository;
 import com.example.mercadoDB.api.response.Response;
+import com.example.mercadoDB.api.services.MercadoService;
 import com.example.mercadoDB.api.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,7 @@ import java.util.List;
 public class ProdutoController {
 
     @Autowired
-    ProdutoRepository produtoRepository;
-
-    @Autowired
-    MercadoRepository mercadoRepository;
+    MercadoService mercadoService;
 
     @Autowired
     ProdutoService produtoService;
@@ -40,8 +38,8 @@ public class ProdutoController {
     ResponseEntity<Response<ProdutoEntity>> adicionaProduto (@Valid @RequestBody ProdutoDto produtoDto, BindingResult result) {
         Response<ProdutoEntity> response = new Response ();
 
-        if (result.hasErrors() || mercadoRepository.findById(produtoDto.getMercado_id())== null){
-            if (mercadoRepository.findById(produtoDto.getMercado_id())== null){
+        if (result.hasErrors() || mercadoService.buscarPorId(produtoDto.getMercado_id())== null){
+            if (mercadoService.buscarPorId(produtoDto.getMercado_id())== null){
                 response.getErrors().add("Mercado_id "+produtoDto.getMercado_id()+" não existe, digite outro");
             }
             if (result.hasErrors()){
@@ -60,8 +58,8 @@ public class ProdutoController {
     ResponseEntity<Response<ProdutoEntity>> atualizaProduto (@Valid @RequestBody ProdutoDto produtoDto, BindingResult result) {
         Response <ProdutoEntity> response = new Response<ProdutoEntity>();
 
-        if (result.hasErrors() || produtoRepository.findById(produtoDto.getId())==null){
-            if (produtoRepository.findById(produtoDto.getId())==null){
+        if (result.hasErrors() || produtoService.buscarPorId(produtoDto.getId())==null){
+            if (produtoService.buscarPorId(produtoDto.getId())==null){
                 response.getErrors().add("O id: "+produtoDto.getId()+" não existe, digite outro");
             }
             if (result.hasErrors()){
@@ -79,7 +77,7 @@ public class ProdutoController {
     @RequestMapping (value = "removerProduto", method = RequestMethod.DELETE)
     ResponseEntity <Response<String>> removerProduto (@RequestBody ProdutoEntity produtoEntity) {
         Response <String> response = new Response <String>();
-        if (produtoRepository.findById(produtoEntity.getId())!=null) {
+        if (produtoService.buscarPorId(produtoEntity.getId())!=null) {
             produtoService.removerProduto(produtoEntity);
             response.setData("Produto Removido");
             return ResponseEntity.ok(response);

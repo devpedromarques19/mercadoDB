@@ -15,12 +15,14 @@ public class MercadoService {
 
     public MercadoEntity persistirMercado (MercadoEntity mercado){return this.mercadoRepository.save(mercado);}
 
-    public MercadoEntity buscarPorId (int id){
-        return this.mercadoRepository.getById(id);
-    }
+    public MercadoEntity buscarPorId (int id){return this.mercadoRepository.findById(id);}
+
+    public MercadoEntity buscarPorCnpj (String cnpj){return this.mercadoRepository.findByCnpj(cnpj);}
 
     public List<MercadoEntity> getTodosMercados(){ return this.mercadoRepository.findAll(); }
+
     public void removerMercado (MercadoEntity mercadoEntity){mercadoRepository.delete(mercadoEntity);}
 
 
 }
+

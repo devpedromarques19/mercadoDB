@@ -10,4 +10,4 @@ ALTER TABLE produto add primary key(id);
 
 ALTER TABLE produto MODIFY id bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE produto add foreign key(mercado_id) references mercado (id);
+ALTER TABLE produto add foreign key(mercado_id) references mercado (id) on delete cascade;

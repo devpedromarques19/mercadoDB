@@ -18,6 +18,8 @@ public class ProdutoService {
     @Autowired
     MercadoRepository mercadoRepository;
 
+    public ProdutoEntity buscarPorId (int id){return this.produtoRepository.findById(id);}
+
     public List<ProdutoEntity> getTodosProdutos (){return this.produtoRepository.findAll();}
 
     public List<ProdutoEntity> getTodosProdutosbyMercado (int mercado_id) {
