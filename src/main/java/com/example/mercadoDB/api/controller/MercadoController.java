@@ -56,8 +56,20 @@ public class MercadoController {
     public ResponseEntity <Response<MercadoEntity>> atualizaMercado (@Valid @RequestBody MercadoEntity mercadoEntity, BindingResult result) {
 
         Response<MercadoEntity> response = new Response<MercadoEntity>();
+        boolean aux = false;
 
-        if (result.hasErrors()||mercadoService.buscarPorId(mercadoEntity.getId())==null) {
+        if (mercadoService.buscarPorCnpj(mercadoEntity.getCnpj()) != null) {
+
+            if (!mercadoService.buscarPorId(mercadoEntity.getId()).getCnpj().equals(mercadoEntity.getCnpj())){
+                response.getErrors().add("CNPJ já existente no banco, digite outro");
+                aux = true;
+            }
+        }
+
+
+        if (result.hasErrors()||mercadoService.buscarPorId(mercadoEntity.getId())==null || aux) {
+
+
             if (mercadoService.buscarPorId(mercadoEntity.getId())==null){
                 response.getErrors().add("O mercado com o id "+mercadoEntity.getId()+" não existe, digite outro");
             }
